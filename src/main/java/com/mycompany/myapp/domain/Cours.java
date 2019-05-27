@@ -1,12 +1,15 @@
 package com.mycompany.myapp.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -32,6 +35,11 @@ public class Cours implements Serializable {
 
     @Column(name = "teacher")
     private String teacher;
+
+    @ManyToMany(mappedBy = "cours")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<Apprenant> apprenants = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -79,6 +87,31 @@ public class Cours implements Serializable {
 
     public void setTeacher(String teacher) {
         this.teacher = teacher;
+    }
+
+    public Set<Apprenant> getApprenants() {
+        return apprenants;
+    }
+
+    public Cours apprenants(Set<Apprenant> apprenants) {
+        this.apprenants = apprenants;
+        return this;
+    }
+
+    public Cours addApprenant(Apprenant apprenant) {
+        this.apprenants.add(apprenant);
+        apprenant.getCours().add(this);
+        return this;
+    }
+
+    public Cours removeApprenant(Apprenant apprenant) {
+        this.apprenants.remove(apprenant);
+        apprenant.getCours().remove(this);
+        return this;
+    }
+
+    public void setApprenants(Set<Apprenant> apprenants) {
+        this.apprenants = apprenants;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

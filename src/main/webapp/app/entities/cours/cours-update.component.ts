@@ -3,8 +3,12 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import { JhiAlertService } from 'ng-jhipster';
 import { ICours, Cours } from 'app/shared/model/cours.model';
 import { CoursService } from './cours.service';
+import { IApprenant } from 'app/shared/model/apprenant.model';
+import { ApprenantService } from 'app/entities/apprenant';
 
 @Component({
   selector: 'jhi-cours-update',
@@ -14,6 +18,8 @@ export class CoursUpdateComponent implements OnInit {
   cours: ICours;
   isSaving: boolean;
 
+  apprenants: IApprenant[];
+
   editForm = this.fb.group({
     id: [],
     name: [],
@@ -21,7 +27,13 @@ export class CoursUpdateComponent implements OnInit {
     teacher: []
   });
 
-  constructor(protected coursService: CoursService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected jhiAlertService: JhiAlertService,
+    protected coursService: CoursService,
+    protected apprenantService: ApprenantService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.isSaving = false;
@@ -29,6 +41,13 @@ export class CoursUpdateComponent implements OnInit {
       this.updateForm(cours);
       this.cours = cours;
     });
+    this.apprenantService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<IApprenant[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IApprenant[]>) => response.body)
+      )
+      .subscribe((res: IApprenant[]) => (this.apprenants = res), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(cours: ICours) {
@@ -76,5 +95,23 @@ export class CoursUpdateComponent implements OnInit {
 
   protected onSaveError() {
     this.isSaving = false;
+  }
+  protected onError(errorMessage: string) {
+    this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  trackApprenantById(index: number, item: IApprenant) {
+    return item.id;
+  }
+
+  getSelected(selectedVals: Array<any>, option: any) {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
+        }
+      }
+    }
+    return option;
   }
 }

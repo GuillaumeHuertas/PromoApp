@@ -3,32 +3,29 @@
     "clientRootFolder": "",
     "relationships": [
         {
-            "relationshipName": "apprenant",
-            "otherEntityName": "apprenant",
+            "relationshipName": "cours",
+            "otherEntityName": "cours",
             "relationshipType": "many-to-many",
-            "ownerSide": false,
-            "otherEntityRelationshipName": "cours"
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "apprenant"
         }
     ],
     "fields": [
         {
-            "fieldName": "name",
+            "fieldName": "firstname",
             "fieldType": "String"
         },
         {
-            "fieldName": "numberStudent",
-            "fieldType": "Integer"
-        },
-        {
-            "fieldName": "teacher",
+            "fieldName": "lastname",
             "fieldType": "String"
         }
     ],
-    "changelogDate": "20190527093016",
+    "changelogDate": "20190527093942",
     "dto": "no",
     "searchEngine": false,
     "service": "no",
-    "entityTableName": "cours",
+    "entityTableName": "apprenant",
     "databaseType": "sql",
     "jpaMetamodelFiltering": false,
     "pagination": "no"
