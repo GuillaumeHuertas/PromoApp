@@ -1,0 +1,11 @@
+version: '2'
+services:
+  promoapp-postgresql:
+    image: postgres:11.2
+    # volumes:
+    #     - ~/volumes/jhipster/PromoApp/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=PromoApp
+      - POSTGRES_PASSWORD=
+    ports:
+      - 5432:5432
