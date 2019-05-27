@@ -1,0 +1,28 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "cours",
+            "otherEntityName": "cours",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "formation"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "intitule",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20190527131637",
+    "dto": "no",
+    "searchEngine": false,
+    "service": "no",
+    "entityTableName": "formation",
+    "databaseType": "sql",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
+}

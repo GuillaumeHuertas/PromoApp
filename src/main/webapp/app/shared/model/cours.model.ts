@@ -1,4 +1,5 @@
 import { IApprenant } from 'app/shared/model/apprenant.model';
+import { IFormation } from 'app/shared/model/formation.model';
 
 export interface ICours {
   id?: number;
@@ -6,6 +7,7 @@ export interface ICours {
   numberStudent?: number;
   teacher?: string;
   apprenants?: IApprenant[];
+  formations?: IFormation[];
 }
 
 export class Cours implements ICours {
@@ -14,6 +16,7 @@ export class Cours implements ICours {
     public name?: string,
     public numberStudent?: number,
     public teacher?: string,
-    public apprenants?: IApprenant[]
+    public apprenants?: IApprenant[],
+    public formations?: IFormation[]
   ) {}
 }

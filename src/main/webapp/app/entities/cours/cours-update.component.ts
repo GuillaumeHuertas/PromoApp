@@ -9,6 +9,8 @@ import { ICours, Cours } from 'app/shared/model/cours.model';
 import { CoursService } from './cours.service';
 import { IApprenant } from 'app/shared/model/apprenant.model';
 import { ApprenantService } from 'app/entities/apprenant';
+import { IFormation } from 'app/shared/model/formation.model';
+import { FormationService } from 'app/entities/formation';
 
 @Component({
   selector: 'jhi-cours-update',
@@ -19,6 +21,8 @@ export class CoursUpdateComponent implements OnInit {
   isSaving: boolean;
 
   apprenants: IApprenant[];
+
+  formations: IFormation[];
 
   editForm = this.fb.group({
     id: [],
@@ -31,6 +35,7 @@ export class CoursUpdateComponent implements OnInit {
     protected jhiAlertService: JhiAlertService,
     protected coursService: CoursService,
     protected apprenantService: ApprenantService,
+    protected formationService: FormationService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -48,6 +53,13 @@ export class CoursUpdateComponent implements OnInit {
         map((response: HttpResponse<IApprenant[]>) => response.body)
       )
       .subscribe((res: IApprenant[]) => (this.apprenants = res), (res: HttpErrorResponse) => this.onError(res.message));
+    this.formationService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<IFormation[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IFormation[]>) => response.body)
+      )
+      .subscribe((res: IFormation[]) => (this.formations = res), (res: HttpErrorResponse) => this.onError(res.message));
   }
 
   updateForm(cours: ICours) {
@@ -101,6 +113,10 @@ export class CoursUpdateComponent implements OnInit {
   }
 
   trackApprenantById(index: number, item: IApprenant) {
+    return item.id;
+  }
+
+  trackFormationById(index: number, item: IFormation) {
     return item.id;
   }
 

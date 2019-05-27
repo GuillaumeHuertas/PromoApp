@@ -8,6 +8,13 @@
             "relationshipType": "many-to-many",
             "ownerSide": false,
             "otherEntityRelationshipName": "cours"
+        },
+        {
+            "relationshipName": "formation",
+            "otherEntityName": "formation",
+            "relationshipType": "many-to-many",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "cours"
         }
     ],
     "fields": [

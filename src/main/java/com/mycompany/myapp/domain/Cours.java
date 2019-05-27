@@ -41,6 +41,11 @@ public class Cours implements Serializable {
     @JsonIgnore
     private Set<Apprenant> apprenants = new HashSet<>();
 
+    @ManyToMany(mappedBy = "cours")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<Formation> formations = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -112,6 +117,31 @@ public class Cours implements Serializable {
 
     public void setApprenants(Set<Apprenant> apprenants) {
         this.apprenants = apprenants;
+    }
+
+    public Set<Formation> getFormations() {
+        return formations;
+    }
+
+    public Cours formations(Set<Formation> formations) {
+        this.formations = formations;
+        return this;
+    }
+
+    public Cours addFormation(Formation formation) {
+        this.formations.add(formation);
+        formation.getCours().add(this);
+        return this;
+    }
+
+    public Cours removeFormation(Formation formation) {
+        this.formations.remove(formation);
+        formation.getCours().remove(this);
+        return this;
+    }
+
+    public void setFormations(Set<Formation> formations) {
+        this.formations = formations;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
