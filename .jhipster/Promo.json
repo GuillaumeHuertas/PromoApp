@@ -1,0 +1,41 @@
+{
+    "name": "Promo",
+    "fields": [
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "start",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "end",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "apprenant",
+            "otherEntityRelationshipName": "promo",
+            "relationshipName": "apprenant"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "formation",
+            "otherEntityRelationshipName": "promo",
+            "relationshipName": "formation",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190527141921",
+    "entityTableName": "promo",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,40 @@
+{
+    "name": "Cours",
+    "fields": [
+        {
+            "fieldName": "theme",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "duration",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "apprenant",
+            "otherEntityRelationshipName": "cours",
+            "relationshipName": "apprenant",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "formation",
+            "otherEntityRelationshipName": "cours",
+            "relationshipName": "formation",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20190527141919",
+    "entityTableName": "cours",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

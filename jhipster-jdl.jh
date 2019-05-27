@@ -1,0 +1,48 @@
+entity Cours {
+	theme String
+    duration Integer
+}
+
+entity Apprenant {
+	firstname String
+    lastname String
+    birthdate LocalDate
+    phone String
+}
+
+entity Promo {
+	code String
+    start LocalDate
+    end LocalDate
+}
+
+entity Formation {
+	intitule String
+    teacher String
+}
+
+entity Niveau {
+	libelle String
+    niveau String
+}
+
+relationship ManyToMany {
+    Cours{apprenant} to Apprenant{cours}
+    Formation{cours} to Cours{formation}
+}
+
+relationship OneToMany {
+	Formation{promo} to Promo{formation}
+    Promo{apprenant} to Apprenant{promo}
+    Niveau{formation} to Formation{niveau}
+}
+
+
+
+
+
+
+
+
+
+

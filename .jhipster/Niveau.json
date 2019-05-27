@@ -1,0 +1,30 @@
+{
+    "name": "Niveau",
+    "fields": [
+        {
+            "fieldName": "libelle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "niveau",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "formation",
+            "otherEntityRelationshipName": "niveau",
+            "relationshipName": "formation"
+        }
+    ],
+    "changelogDate": "20190527141923",
+    "entityTableName": "niveau",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

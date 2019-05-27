@@ -1,0 +1,45 @@
+{
+    "name": "Formation",
+    "fields": [
+        {
+            "fieldName": "intitule",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "teacher",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "promo",
+            "otherEntityRelationshipName": "formation",
+            "relationshipName": "promo"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "cours",
+            "otherEntityRelationshipName": "formation",
+            "relationshipName": "cours",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "niveau",
+            "otherEntityRelationshipName": "formation",
+            "relationshipName": "niveau",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190527141922",
+    "entityTableName": "formation",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
